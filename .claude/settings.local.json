@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/pc/.claude/skills/ui-ux-pro-max/**)",
+      "Bash(python scripts/search.py \"tech education training platform dark modern\" --design-system -p \"10HTECH\")",
+      "Bash(python scripts/search.py \"landing page hero pricing testimonials\" --domain landing)",
+      "Bash(python scripts/search.py \"glassmorphism dark purple tech\" --domain style)",
+      "Bash(git --version)",
+      "Bash(gh --version)",
+      "Bash(gh auth:*)",
+      "Bash(git config:*)"
+    ]
+  }
+}

@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>10HTECH – Centre de Formations Accélérées</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --cyan:    #00BCD4;
+      --cyan-l:  #26D0E2;
+      --cyan-d:  #0097A7;
+      --navy:    #0B1A2B;
+      --navy2:   #0E2038;
+      --navy3:   #122540;
+      --dark:    #060E18;
+      --text:    #EEF6FF;
+      --sub:     #7FA8C9;
+      --border:  rgba(0,188,212,.18);
+      --glow:    rgba(0,188,212,.12);
+      --r:       18px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--dark); color: var(--text); overflow-x: hidden; line-height: 1.6; }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--dark); }
+    ::-webkit-scrollbar-thumb { background: var(--cyan); border-radius: 3px; }
+
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 0 28px; }
+    h1,h2,h3,h4 { font-family: 'Outfit', sans-serif; line-height: 1.1; }
+
+    .cx { color: var(--cyan); }
+    .gt { background: linear-gradient(120deg, var(--cyan-l), var(--cyan), #00E5FF); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+    /* ── BTN ── */
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; border-radius: 12px; font-family: 'Outfit', sans-serif; font-weight: 700; font-size: .95rem; cursor: pointer; transition: all .22s; text-decoration: none; border: none; }
+    .btn-primary { background: var(--cyan); color: var(--dark); box-shadow: 0 0 32px rgba(0,188,212,.3); }
+    .btn-primary:hover { background: var(--cyan-l); transform: translateY(-2px); box-shadow: 0 0 48px rgba(0,188,212,.5); }
+    .btn-secondary { background: rgba(0,188,212,.08); border: 1.5px solid var(--border); color: var(--text); }
+    .btn-secondary:hover { background: rgba(0,188,212,.16); border-color: rgba(0,188,212,.4); }
+
+    /* ── TAG ── */
+    .tag { display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; border-radius: 999px; font-size: .75rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; background: rgba(0,188,212,.08); border: 1px solid rgba(0,188,212,.25); color: var(--cyan); }
+    .tag .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); animation: bk 2s infinite; }
+    @keyframes bk { 0%,100%{opacity:1} 50%{opacity:.25} }
+
+    /* ── LOGO SVG ── */
+    .logo-svg { width: 40px; height: 40px; flex-shrink: 0; }
+    .logo-name { font-family: 'Outfit', sans-serif; font-size: 1.22rem; font-weight: 900; color: var(--text); letter-spacing: -.01em; }
+    .logo-name span { color: var(--cyan); }
+
+    section { padding: 100px 0; }
+
+    /* ══════════════════════════
+       NAV
+    ══════════════════════════ */
+    nav {
+      position: fixed; top: 14px; left: 50%; transform: translateX(-50%);
+      width: calc(100% - 40px); max-width: 1160px;
+      background: rgba(6,14,24,.85); border: 1px solid var(--border);
+      border-radius: 16px; backdrop-filter: blur(24px);
+      padding: 13px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      z-index: 100; transition: background .3s;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { color: var(--sub); text-decoration: none; font-size: .88rem; font-weight: 500; transition: color .2s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta { display: flex; align-items: center; gap: 10px; }
+    .nav-phone { display: flex; align-items: center; gap: 7px; color: var(--cyan); font-weight: 700; font-size: .88rem; text-decoration: none; }
+    .nav-phone svg { width: 14px; height: 14px; }
+
+    /* ══════════════════════════
+       HERO
+    ══════════════════════════ */
+    .hero {
+      min-height: 100vh; position: relative; overflow: hidden;
+      display: flex; align-items: center; padding: 130px 0 80px;
+    }
+    /* animated bg gradient */
+    .hero-bg {
+      position: absolute; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 70% 60% at 65% 40%, rgba(0,188,212,.13) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 50% at 10% 80%, rgba(0,150,180,.07) 0%, transparent 60%);
+    }
+    /* grid overlay */
+    .hero::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(0,188,212,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,188,212,.035) 1px, transparent 1px);
+      background-size: 66px 66px;
+    }
+    /* fade out grid at bottom */
+    .hero::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 200px; pointer-events: none;
+      background: linear-gradient(transparent, var(--dark));
+    }
+
+    .hero-inner { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; width: 100%; }
+
+    /* left */
+    .hero-left .tag { margin-bottom: 28px; }
+    .hero-left h1 { font-size: clamp(2.6rem, 5.5vw, 4rem); font-weight: 900; letter-spacing: -.03em; margin-bottom: 22px; }
+    .hero-left p { color: var(--sub); font-size: clamp(.95rem, 1.7vw, 1.1rem); max-width: 480px; line-height: 1.8; margin-bottom: 38px; }
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 52px; }
+    .hero-divider { height: 1px; background: var(--border); margin-bottom: 28px; }
+    .hero-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+    .chip {
+      padding: 6px 14px; border-radius: 999px; font-size: .78rem; font-weight: 600;
+      background: rgba(0,188,212,.06); border: 1px solid rgba(0,188,212,.15); color: var(--sub);
+      transition: .2s;
+    }
+    .chip:hover { border-color: var(--cyan); color: var(--cyan); background: rgba(0,188,212,.12); }
+
+    /* right — hero card */
+    .hero-right { position: relative; }
+    .hero-card {
+      background: var(--navy); border: 1px solid var(--border);
+      border-radius: 24px; padding: 36px;
+      position: relative; overflow: hidden;
+    }
+    .hero-card::before {
+      content: ''; position: absolute; top: 0; right: 0;
+      width: 200px; height: 200px;
+      background: radial-gradient(circle at top right, rgba(0,188,212,.15), transparent 70%);
+      pointer-events: none;
+    }
+    .hc-header { display: flex; align-items: center; gap: 14px; margin-bottom: 30px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+    .hc-header .logo-svg { width: 48px; height: 48px; }
+    .hc-header strong { font-family: 'Outfit', sans-serif; font-size: 1.1rem; font-weight: 800; display: block; }
+    .hc-header span { font-size: .78rem; color: var(--sub); }
+    .hc-label { font-size: .72rem; text-transform: uppercase; letter-spacing: .1em; color: var(--sub); font-weight: 700; margin-bottom: 14px; }
+    .hc-items { display: flex; flex-direction: column; gap: 8px; }
+    .hc-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 11px 14px; border-radius: 11px;
+      background: rgba(0,188,212,.05); border: 1px solid rgba(0,188,212,.1);
+      font-size: .88rem; font-weight: 600; transition: .2s;
+    }
+    .hc-item:hover { background: rgba(0,188,212,.1); border-color: rgba(0,188,212,.25); }
+    .hc-item svg { width: 16px; height: 16px; color: var(--cyan); flex-shrink: 0; }
+    .hc-cta { margin-top: 24px; display: flex; }
+    .hc-cta a { flex: 1; justify-content: center; }
+
+    /* floating badge */
+    .hero-badge-float {
+      position: absolute; bottom: -18px; left: -18px;
+      background: var(--navy3); border: 1px solid var(--border);
+      border-radius: 14px; padding: 14px 18px;
+      display: flex; align-items: center; gap: 12px;
+      box-shadow: 0 16px 48px rgba(0,0,0,.5);
+      animation: fl 5s ease-in-out infinite;
+    }
+    @keyframes fl { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+    .badge-ico { width: 36px; height: 36px; background: rgba(0,188,212,.12); border-radius: 9px; display: grid; place-items: center; }
+    .badge-ico svg { width: 18px; height: 18px; color: var(--cyan); }
+    .badge-num { font-family: 'Outfit', sans-serif; font-size: 1.1rem; font-weight: 800; color: var(--cyan); }
+    .badge-label { font-size: .72rem; color: var(--sub); }
+
+    /* ══════════════════════════
+       MARQUEE
+    ══════════════════════════ */
+    .marquee { overflow: hidden; background: var(--navy); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 13px 0; }
+    .mtrack { display: flex; gap: 48px; animation: mq 30s linear infinite; width: max-content; }
+    .mtrack:hover { animation-play-state: paused; }
+    @keyframes mq { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+    .mitem { display: flex; align-items: center; gap: 10px; white-space: nowrap; font-size: .83rem; font-weight: 600; color: var(--sub); }
+    .mitem::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); flex-shrink: 0; }
+
+    /* ══════════════════════════
+       FORMATIONS
+    ══════════════════════════ */
+    .formations { background: var(--dark); }
+    .sec-hd { text-align: center; margin-bottom: 56px; }
+    .sec-hd h2 { font-size: clamp(1.8rem, 3.8vw, 2.8rem); font-weight: 900; margin-bottom: 14px; }
+    .sec-hd p { color: var(--sub); font-size: 1rem; max-width: 520px; margin: 0 auto; }
+    .sec-hd .tag { margin-bottom: 18px; }
+
+    .form-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .fcard {
+      background: var(--navy); border: 1px solid var(--border);
+      border-radius: 22px; padding: 36px;
+      position: relative; overflow: hidden;
+      transition: border-color .25s, transform .25s;
+    }
+    .fcard:hover { border-color: rgba(0,188,212,.4); transform: translateY(-4px); }
+    .fcard-glow {
+      position: absolute; top: -60px; right: -60px;
+      width: 180px; height: 180px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,188,212,.12), transparent 70%);
+      pointer-events: none;
+    }
+    .fcard-num {
+      font-family: 'Outfit', sans-serif; font-size: 3.8rem; font-weight: 900;
+      line-height: 1; color: rgba(0,188,212,.1); display: block; margin-bottom: 10px;
+    }
+    .fcard h3 { font-size: .9rem; font-weight: 800; text-transform: uppercase; letter-spacing: .07em; color: var(--cyan); margin-bottom: 5px; }
+    .fcard-sub { font-size: .75rem; color: var(--sub); letter-spacing: .04em; margin-bottom: 26px; }
+    .fcard-divider { height: 1px; background: var(--border); margin-bottom: 22px; }
+    .fcard ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .fcard ul li {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: .9rem; color: var(--text); line-height: 1.45;
+    }
+    .fcard ul li::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--cyan); flex-shrink: 0; margin-top: 7px; }
+
+    /* ══════════════════════════
+       POURQUOI
+    ══════════════════════════ */
+    .why { background: var(--navy); }
+    .why-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .why-left .tag { margin-bottom: 22px; }
+    .why-left h2 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 900; margin-bottom: 18px; }
+    .why-left > p { color: var(--sub); font-size: .97rem; line-height: 1.8; margin-bottom: 44px; }
+    .feats { display: flex; flex-direction: column; gap: 0; }
+    .feat {
+      display: flex; gap: 18px; align-items: flex-start;
+      padding: 22px 0; border-bottom: 1px solid var(--border);
+    }
+    .feat:last-child { border-bottom: none; }
+    .feat-ico {
+      width: 44px; height: 44px; flex-shrink: 0;
+      background: rgba(0,188,212,.08); border: 1px solid rgba(0,188,212,.2);
+      border-radius: 13px; display: grid; place-items: center;
+    }
+    .feat-ico svg { width: 20px; height: 20px; color: var(--cyan); }
+    .feat h4 { font-size: .97rem; font-weight: 700; margin-bottom: 5px; }
+    .feat p { font-size: .84rem; color: var(--sub); line-height: 1.65; }
+
+    .why-right { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .wcard {
+      background: var(--dark); border: 1px solid var(--border);
+      border-radius: 18px; padding: 30px 24px;
+      text-align: center; transition: border-color .2s, transform .2s;
+    }
+    .wcard:hover { border-color: rgba(0,188,212,.35); transform: translateY(-3px); }
+    .wcard-num {
+      font-family: 'Outfit', sans-serif; font-size: 2.4rem; font-weight: 900;
+      background: linear-gradient(120deg, var(--cyan-l), var(--cyan));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      display: block; margin-bottom: 8px;
+    }
+    .wcard p { font-size: .82rem; color: var(--sub); line-height: 1.5; }
+    .wcard-wide {
+      grid-column: span 2;
+      background: linear-gradient(135deg, rgba(0,188,212,.1), rgba(0,150,180,.06));
+      border-color: rgba(0,188,212,.3);
+    }
+    .wcard-wide h3 { font-size: 1.05rem; font-weight: 800; margin-bottom: 8px; }
+    .wcard-wide p { font-size: .85rem; color: var(--sub); line-height: 1.7; }
+
+    /* ══════════════════════════
+       ETAPES
+    ══════════════════════════ */
+    .etapes { background: var(--dark); }
+    .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .step {
+      background: var(--navy); border: 1px solid var(--border);
+      border-radius: 20px; padding: 30px 24px;
+      position: relative; overflow: hidden;
+      transition: border-color .22s, transform .22s;
+    }
+    .step:hover { border-color: rgba(0,188,212,.4); transform: translateY(-4px); }
+    .step-bg-n {
+      position: absolute; top: 12px; right: 16px;
+      font-family: 'Outfit', sans-serif; font-size: 3.5rem; font-weight: 900;
+      color: rgba(0,188,212,.05); line-height: 1; pointer-events: none;
+    }
+    .step-ico {
+      width: 46px; height: 46px; border-radius: 13px;
+      background: rgba(0,188,212,.1); border: 1px solid rgba(0,188,212,.2);
+      display: grid; place-items: center; margin-bottom: 18px;
+    }
+    .step-ico svg { width: 21px; height: 21px; color: var(--cyan); }
+    .step h4 { font-size: .93rem; font-weight: 800; margin-bottom: 8px; }
+    .step p { font-size: .82rem; color: var(--sub); line-height: 1.65; }
+
+    /* ══════════════════════════
+       CONTACT
+    ══════════════════════════ */
+    .contact { background: var(--navy); }
+    .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .contact-left .tag { margin-bottom: 22px; }
+    .contact-left h2 { font-size: clamp(1.8rem, 3.5vw, 2.5rem); font-weight: 900; margin-bottom: 18px; }
+    .contact-left > p { color: var(--sub); font-size: .97rem; line-height: 1.8; margin-bottom: 36px; }
+    .crows { display: flex; flex-direction: column; gap: 14px; }
+    .crow {
+      display: flex; align-items: center; gap: 16px;
+      background: var(--dark); border: 1px solid var(--border);
+      border-radius: 14px; padding: 18px 20px; transition: border-color .2s;
+    }
+    .crow:hover { border-color: rgba(0,188,212,.35); }
+    .crow-ico {
+      width: 42px; height: 42px; background: rgba(0,188,212,.1); border-radius: 11px;
+      display: grid; place-items: center; flex-shrink: 0;
+    }
+    .crow-ico svg { width: 18px; height: 18px; color: var(--cyan); }
+    .crow h4 { font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; color: var(--sub); font-weight: 700; margin-bottom: 3px; }
+    .crow p, .crow a { font-size: .95rem; font-weight: 700; color: var(--text); text-decoration: none; }
+    .crow a { color: var(--cyan); }
+    .crow a:hover { text-decoration: underline; }
+
+    .contact-right {
+      background: var(--dark); border: 1px solid var(--border);
+      border-radius: 24px; padding: 48px; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .contact-right::before {
+      content: ''; position: absolute; top: -80px; right: -80px;
+      width: 300px; height: 300px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,188,212,.12), transparent 70%);
+      pointer-events: none;
+    }
+    .contact-right h3 { font-size: 1.35rem; font-weight: 900; margin-bottom: 12px; }
+    .contact-right p { color: var(--sub); font-size: .9rem; line-height: 1.7; margin-bottom: 28px; }
+
+    /* ══════════════════════════
+       CTA BANNER
+    ══════════════════════════ */
+    .cta-sec { padding: 0 0 100px; }
+    .cta-banner {
+      background: linear-gradient(135deg, var(--navy2), var(--navy3));
+      border: 1px solid rgba(0,188,212,.35);
+      border-radius: 28px; padding: 72px 56px; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .cta-banner::before {
+      content: ''; position: absolute;
+      width: 700px; height: 400px;
+      background: radial-gradient(ellipse, rgba(0,188,212,.18), transparent 65%);
+      top: -200px; left: 50%; transform: translateX(-50%); pointer-events: none;
+    }
+    .cta-banner::after {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background-image: linear-gradient(rgba(0,188,212,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(0,188,212,.025) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .cta-banner h2 { font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 900; margin-bottom: 14px; position: relative; z-index: 1; }
+    .cta-banner p { color: var(--sub); font-size: 1.05rem; margin-bottom: 36px; position: relative; z-index: 1; }
+    .cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1; }
+
+    /* ══════════════════════════
+       FOOTER
+    ══════════════════════════ */
+    footer { background: var(--navy); border-top: 1px solid var(--border); padding: 60px 0 28px; }
+    .foot-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+    .foot-brand p { color: var(--sub); font-size: .85rem; line-height: 1.8; margin-top: 16px; max-width: 300px; }
+    .foot-col h5 { font-family: 'Outfit', sans-serif; font-size: .75rem; font-weight: 800; text-transform: uppercase; letter-spacing: .1em; color: var(--sub); margin-bottom: 18px; }
+    .foot-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .foot-col ul a { color: var(--sub); text-decoration: none; font-size: .84rem; transition: color .2s; }
+    .foot-col ul a:hover { color: var(--cyan); }
+    .foot-bottom {
+      border-top: 1px solid var(--border); padding-top: 24px;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
+      font-size: .78rem; color: var(--sub);
+    }
+    .foot-bottom a { color: var(--cyan); text-decoration: none; font-weight: 700; }
+
+    /* ══════════════════════════
+       REVEAL
+    ══════════════════════════ */
+    .rv { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+    .rv.in { opacity: 1; transform: none; }
+
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+
+    /* ══════════════════════════
+       RESPONSIVE
+    ══════════════════════════ */
+    @media(max-width:1024px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-right { display: none; }
+      .form-grid { grid-template-columns: 1fr; }
+      .why-inner { grid-template-columns: 1fr; gap: 48px; }
+      .why-right { max-width: 480px; }
+      .contact-inner { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr 1fr; }
+      .foot-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media(max-width:768px) {
+      .nav-links { display: none; }
+      .steps { grid-template-columns: 1fr; }
+      .cta-banner { padding: 44px 24px; }
+      section { padding: 70px 0; }
+      .foot-grid { grid-template-columns: 1fr; }
+      .why-right { grid-template-columns: 1fr 1fr; }
+    }
+    @media(max-width:480px) {
+      .hero-btns, .cta-btns { flex-direction: column; }
+      .btn { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav role="navigation" aria-label="Navigation principale">
+  <a href="#" class="nav-logo" aria-label="10HTECH accueil">
+    <svg class="logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="50" cy="50" r="48" stroke="#00BCD4" stroke-width="3" fill="none"/>
+      <line x1="50" y1="4"  x2="50" y2="14" stroke="#00BCD4" stroke-width="3.5" stroke-linecap="round"/>
+      <line x1="50" y1="86" x2="50" y2="96" stroke="#00BCD4" stroke-width="3.5" stroke-linecap="round"/>
+      <line x1="4"  y1="50" x2="14" y2="50" stroke="#00BCD4" stroke-width="3.5" stroke-linecap="round"/>
+      <line x1="86" y1="50" x2="96" y2="50" stroke="#00BCD4" stroke-width="3.5" stroke-linecap="round"/>
+      <line x1="15" y1="15" x2="22" y2="22" stroke="#00BCD4" stroke-width="2.8" stroke-linecap="round" opacity=".5"/>
+      <line x1="85" y1="15" x2="78" y2="22" stroke="#00BCD4" stroke-width="2.8" stroke-linecap="round" opacity=".5"/>
+      <line x1="15" y1="85" x2="22" y2="78" stroke="#00BCD4" stroke-width="2.8" stroke-linecap="round" opacity=".5"/>
+      <line x1="85" y1="85" x2="78" y2="78" stroke="#00BCD4" stroke-width="2.8" stroke-linecap="round" opacity=".5"/>
+      <path d="M50 22C36 22 26 32 26 44C26 53 31 60 38 64L38 72L62 72L62 64C69 60 74 53 74 44C74 32 64 22 50 22Z" fill="#00BCD4"/>
+      <circle cx="50" cy="43" r="12" fill="#060E18"/>
+      <line x1="50" y1="43" x2="50" y2="35" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="50" y1="43" x2="58" y2="47" stroke="#444" stroke-width="2" stroke-linecap="round"/>
+      <rect x="40" y="72" width="20" height="4" rx="2" fill="#00BCD4"/>
+      <rect x="42" y="76" width="16" height="4" rx="2" fill="#00BCD4"/>
+      <rect x="44" y="80" width="12" height="4" rx="2" fill="#00BCD4"/>
+      <rect x="43" y="65" width="14" height="3" rx="1.5" fill="white"/>
+      <rect x="49" y="67" width="2" height="5" rx="1" fill="white"/>
+    </svg>
+    <span class="logo-name">10H<span>TECH</span></span>
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="#formations">Formations</a></li>
+    <li><a href="#pourquoi">Notre méthode</a></li>
+    <li><a href="#etapes">S'inscrire</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+
+  <div class="nav-cta">
+    <a href="tel:+221771708181" class="nav-phone" aria-label="Appeler le 77 170 81 81">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11.7 19.79 19.79 0 01.1 3.1 2 2 0 012.11 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.09a16 16 0 006 6l.56-.56a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+      77 170 81 81
+    </a>
+    <a href="#formations" class="btn btn-primary" style="padding:10px 20px;font-size:.85rem;">Nos formations</a>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="hero" aria-labelledby="h1">
+  <div class="hero-bg"></div>
+  <div class="wrap hero-inner">
+
+    <!-- Gauche -->
+    <div class="hero-left">
+      <div class="tag"><span class="dot"></span>Centre de formations accélérées</div>
+      <h1 id="h1">
+        Développe tes<br/>
+        <span class="gt">compétences</span><br/>
+        numériques
+      </h1>
+      <p>
+        Informatique, développement web, gestion, communication — 10HTECH te prépare concrètement au marché du travail avec des formations intensives et pratiques.
+      </p>
+      <div class="hero-btns">
+        <a href="#formations" class="btn btn-primary">
+          Voir les formations
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a href="tel:+221771708181" class="btn btn-secondary">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11.7 19.79 19.79 0 01.1 3.1 2 2 0 012.11 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.09a16 16 0 006 6l.56-.56a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          77 170 81 81
+        </a>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-chips" aria-label="Domaines proposés">
+        <span class="chip">Informatique</span>
+        <span class="chip">Développement Web</span>
+        <span class="chip">Marketing Digital</span>
+        <span class="chip">Comptabilité</span>
+        <span class="chip">Infographie</span>
+        <span class="chip">Anglais</span>
+        <span class="chip">Réseaux</span>
+      </div>
+    </div>
+
+    <!-- Droite (desktop) -->
+    <div class="hero-right" aria-hidden="true">
+      <div class="hero-card">
+        <div class="hero-card::before"></div>
+        <div class="hc-header">
+          <svg class="logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="48" stroke="#00BCD4" stroke-width="3" fill="none"/>
+            <line x1="50" y1="4" x2="50" y2="14" stroke="#00BCD4" stroke-width="3.5" stroke-linecap="round"/>
+            <line x1="50" y1="86" x2="50" y2="96" stroke="#00BCD4" stroke-width="3.5" stroke-linecap="round"/>
+            <line x1="4" y1="50" x2="14" y2="50" stroke="#00BCD4" stroke-width="3.5" stroke-linecap="round"/>
+            <line x1="86" y1="50" x2="96" y2="50" stroke="#00BCD4" stroke-width="3.5" stroke-linecap="round"/>
+            <path d="M50 22C36 22 26 32 26 44C26 53 31 60 38 64L38 72L62 72L62 64C69 60 74 53 74 44C74 32 64 22 50 22Z" fill="#00BCD4"/>
+            <circle cx="50" cy="43" r="12" fill="#060E18"/>
+            <line x1="50" y1="43" x2="50" y2="35" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="50" y1="43" x2="58" y2="47" stroke="#444" stroke-width="2" stroke-linecap="round"/>
+            <rect x="40" y="72" width="20" height="4" rx="2" fill="#00BCD4"/>
+            <rect x="42" y="76" width="16" height="4" rx="2" fill="#00BCD4"/>
+            <rect x="44" y="80" width="12" height="4" rx="2" fill="#00BCD4"/>
+            <rect x="43" y="65" width="14" height="3" rx="1.5" fill="white"/>
+            <rect x="49" y="67" width="2" height="5" rx="1" fill="white"/>
+          </svg>
+          <div>
+            <strong>10H<span style="color:var(--cyan)">TECH</span></strong>
+            <span>Formations accélérées · Dakar</span>
+          </div>
+        </div>
+        <p class="hc-label">Nos domaines</p>
+        <div class="hc-items">
+          <div class="hc-item">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            Informatique / Numérique / Digital
+          </div>
+          <div class="hc-item">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Gestion / Comptabilité / Communication
+          </div>
+          <div class="hc-item">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Admin. Réseaux &amp; Systèmes
+          </div>
+          <div class="hc-item">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            Développement Web &amp; Mobile
+          </div>
+        </div>
+        <div class="hc-cta">
+          <a href="tel:+221771708181" class="btn btn-primary" style="font-size:.85rem;padding:12px 20px;flex:1;justify-content:center;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11.7 19.79 19.79 0 01.1 3.1 2 2 0 012.11 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.09a16 16 0 006 6l.56-.56a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            Nous appeler
+          </a>
+        </div>
+      </div>
+      <div class="hero-badge-float">
+        <div class="badge-ico">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div>
+          <div class="badge-num">BRT Hyacinthe</div>
+          <div class="badge-label">En face de l'arrêt · Dakar</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ MARQUEE ══ -->
+<div class="marquee" aria-hidden="true">
+  <div class="mtrack">
+    <span class="mitem">Informatique bureautique</span>
+    <span class="mitem">Développement Web &amp; Mobile</span>
+    <span class="mitem">Marketing Digital</span>
+    <span class="mitem">Infographie</span>
+    <span class="mitem">Secrétariat bureautique</span>
+    <span class="mitem">Assistanat de direction</span>
+    <span class="mitem">Comptabilité</span>
+    <span class="mitem">Gestion de caisse</span>
+    <span class="mitem">Administration réseaux</span>
+    <span class="mitem">Cours d'anglais</span>
+    <span class="mitem">Audiovisuelles</span>
+    <!-- duplicate for loop -->
+    <span class="mitem">Informatique bureautique</span>
+    <span class="mitem">Développement Web &amp; Mobile</span>
+    <span class="mitem">Marketing Digital</span>
+    <span class="mitem">Infographie</span>
+    <span class="mitem">Secrétariat bureautique</span>
+    <span class="mitem">Assistanat de direction</span>
+    <span class="mitem">Comptabilité</span>
+    <span class="mitem">Gestion de caisse</span>
+    <span class="mitem">Administration réseaux</span>
+    <span class="mitem">Cours d'anglais</span>
+    <span class="mitem">Audiovisuelles</span>
+  </div>
+</div>
+
+<!-- ══ FORMATIONS ══ -->
+<section id="formations" class="formations" aria-labelledby="form-h2">
+  <div class="wrap">
+    <div class="sec-hd">
+      <div class="tag"><span class="dot"></span>Catalogue</div>
+      <h2 id="form-h2">Toutes nos <span class="gt">formations</span></h2>
+      <p>Trois grands domaines pour couvrir toutes tes ambitions professionnelles.</p>
+    </div>
+    <div class="form-grid">
+
+      <article class="fcard rv">
+        <div class="fcard-glow"></div>
+        <span class="fcard-num">01</span>
+        <h3>Informatique / Numérique / Digital</h3>
+        <p class="fcard-sub">Compétences numériques · Créativité · Web</p>
+        <div class="fcard-divider"></div>
+        <ul>
+          <li>Informatique</li>
+          <li>Infographie</li>
+          <li>Audiovisuelles</li>
+          <li>Marketing digital</li>
+          <li>Développement web</li>
+        </ul>
+      </article>
+
+      <article class="fcard rv">
+        <div class="fcard-glow"></div>
+        <span class="fcard-num">02</span>
+        <h3>Gestion / Comptabilité / Communication</h3>
+        <p class="fcard-sub">Bureau · Finance · Langues professionnelles</p>
+        <div class="fcard-divider"></div>
+        <ul>
+          <li>Secrétariat bureautique</li>
+          <li>Assistanat de direction</li>
+          <li>Gestion de caisse</li>
+          <li>Comptabilité</li>
+          <li>Cours d'anglais</li>
+          <li>Parlais Anglais</li>
+        </ul>
+      </article>
+
+      <article class="fcard rv">
+        <div class="fcard-glow"></div>
+        <span class="fcard-num">03</span>
+        <h3>Domaines Informatique</h3>
+        <p class="fcard-sub">Systèmes · Réseaux · Développement avancé</p>
+        <div class="fcard-divider"></div>
+        <ul>
+          <li>Informatique bureautique et avancé</li>
+          <li>Administration réseaux et systèmes</li>
+          <li>Développement web et mobile</li>
+        </ul>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ POURQUOI ══ -->
+<section id="pourquoi" class="why" aria-labelledby="why-h2">
+  <div class="wrap">
+    <div class="why-inner">
+      <div class="why-left">
+        <div class="tag"><span class="dot"></span>Notre méthode</div>
+        <h2 id="why-h2">Pourquoi choisir <span class="gt">10HTECH</span>&nbsp;?</h2>
+        <p>Des formations condensées, directement applicables. Chez 10HTECH, on privilégie la pratique sur la théorie pour te rendre opérationnel rapidement.</p>
+        <div class="feats">
+          <div class="feat rv">
+            <div class="feat-ico">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            </div>
+            <div>
+              <h4>Formation intensive &amp; ciblée</h4>
+              <p>Un contenu dense, sans remplissage. On va droit à l'essentiel pour que tu sois prêt à travailler.</p>
+            </div>
+          </div>
+          <div class="feat rv">
+            <div class="feat-ico">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </div>
+            <div>
+              <h4>100% pratique</h4>
+              <p>Exercices réels, mises en situation concrètes. Tu apprends en faisant, pas uniquement en écoutant.</p>
+            </div>
+          </div>
+          <div class="feat rv">
+            <div class="feat-ico">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            </div>
+            <div>
+              <h4>Formateurs expérimentés</h4>
+              <p>Des professionnels du terrain qui partagent leur expertise et leurs meilleures pratiques.</p>
+            </div>
+          </div>
+          <div class="feat rv">
+            <div class="feat-ico">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            </div>
+            <div>
+              <h4>Attestation officielle</h4>
+              <p>Reçois une certification à la fin de chaque formation pour valoriser ton parcours professionnel.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="why-right">
+        <div class="wcard rv">
+          <span class="wcard-num">15+</span>
+          <p>filières disponibles</p>
+        </div>
+        <div class="wcard rv">
+          <span class="wcard-num">3</span>
+          <p>grands domaines d'expertise</p>
+        </div>
+        <div class="wcard rv">
+          <span class="wcard-num">100%</span>
+          <p>pratique &amp; certifiant</p>
+        </div>
+        <div class="wcard rv">
+          <span class="wcard-num">
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:40px;height:40px;">
+              <circle cx="50" cy="50" r="48" stroke="#00BCD4" stroke-width="3" fill="none"/>
+              <line x1="50" y1="4" x2="50" y2="14" stroke="#00BCD4" stroke-width="3.5" stroke-linecap="round"/>
+              <line x1="50" y1="86" x2="50" y2="96" stroke="#00BCD4" stroke-width="3.5" stroke-linecap="round"/>
+              <line x1="4" y1="50" x2="14" y2="50" stroke="#00BCD4" stroke-width="3.5" stroke-linecap="round"/>
+              <line x1="86" y1="50" x2="96" y2="50" stroke="#00BCD4" stroke-width="3.5" stroke-linecap="round"/>
+              <path d="M50 22C36 22 26 32 26 44C26 53 31 60 38 64L38 72L62 72L62 64C69 60 74 53 74 44C74 32 64 22 50 22Z" fill="#00BCD4"/>
+              <circle cx="50" cy="43" r="12" fill="#060E18"/>
+              <line x1="50" y1="43" x2="50" y2="35" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="50" y1="43" x2="58" y2="47" stroke="#444" stroke-width="2" stroke-linecap="round"/>
+              <rect x="40" y="72" width="20" height="4" rx="2" fill="#00BCD4"/>
+              <rect x="42" y="76" width="16" height="4" rx="2" fill="#00BCD4"/>
+              <rect x="44" y="80" width="12" height="4" rx="2" fill="#00BCD4"/>
+            </svg>
+          </span>
+          <p style="font-family:'Outfit',sans-serif;font-weight:800;font-size:.9rem;color:var(--text);">10H<span class="cx">TECH</span><br/><span style="font-weight:400;font-size:.78rem;color:var(--sub);">Centre de formations</span></p>
+        </div>
+        <div class="wcard wcard-wide rv">
+          <h3>Un seul centre, <span class="gt">toutes tes ambitions</span></h3>
+          <p>Informatique, numérique, gestion, communication — tout est disponible au centre 10HTECH, en face de l'arrêt BRT Hyacinthe Thiandoum.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ÉTAPES ══ -->
+<section id="etapes" class="etapes" aria-labelledby="etapes-h2">
+  <div class="wrap">
+    <div class="sec-hd">
+      <div class="tag"><span class="dot"></span>Processus d'inscription</div>
+      <h2 id="etapes-h2">S'inscrire en <span class="gt">4 étapes</span></h2>
+      <p>Simple, direct, sans complications.</p>
+    </div>
+    <div class="steps">
+      <div class="step rv">
+        <span class="step-bg-n" aria-hidden="true">01</span>
+        <div class="step-ico">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        <h4>Choisir sa formation</h4>
+        <p>Parcours nos domaines et identifie la filière qui correspond à ton projet professionnel.</p>
+      </div>
+      <div class="step rv">
+        <span class="step-bg-n" aria-hidden="true">02</span>
+        <div class="step-ico">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11.7 19.79 19.79 0 01.1 3.1 2 2 0 012.11 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.09a16 16 0 006 6l.56-.56a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        </div>
+        <h4>Nous contacter</h4>
+        <p>Appelle le <strong class="cx">77 170 81 81</strong> ou viens directement au centre en face de l'arrêt BRT Hyacinthe Thiandoum.</p>
+      </div>
+      <div class="step rv">
+        <span class="step-bg-n" aria-hidden="true">03</span>
+        <div class="step-ico">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </div>
+        <h4>Suivre la formation</h4>
+        <p>Des cours intensifs et pratiques avec des formateurs experts dans un cadre pédagogique structuré.</p>
+      </div>
+      <div class="step rv" style="border-color:rgba(0,188,212,.25);">
+        <span class="step-bg-n" aria-hidden="true">04</span>
+        <div class="step-ico" style="background:rgba(0,188,212,.15);border-color:rgba(0,188,212,.3);">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        </div>
+        <h4>Obtenir sa certification</h4>
+        <p>Reçois ton attestation officielle et intègre le marché du travail avec des compétences reconnues.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTACT ══ -->
+<section id="contact" class="contact" aria-labelledby="contact-h2">
+  <div class="wrap">
+    <div class="contact-inner">
+      <div class="contact-left">
+        <div class="tag"><span class="dot"></span>Nous trouver</div>
+        <h2 id="contact-h2">Viens nous <span class="gt">rencontrer</span></h2>
+        <p>Notre centre est facilement accessible. N'hésite pas à passer ou à nous appeler pour toute question sur les formations, les horaires et les tarifs.</p>
+        <div class="crows">
+          <div class="crow">
+            <div class="crow-ico">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+              <h4>Adresse</h4>
+              <p>En face arrêt BRT Hyacinthe Thiandoum</p>
+            </div>
+          </div>
+          <div class="crow">
+            <div class="crow-ico">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11.7 19.79 19.79 0 01.1 3.1 2 2 0 012.11 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.09a16 16 0 006 6l.56-.56a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            </div>
+            <div>
+              <h4>Téléphone</h4>
+              <a href="tel:+221771708181">77 170 81 81</a>
+            </div>
+          </div>
+          <div class="crow">
+            <div class="crow-ico">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            </div>
+            <div>
+              <h4>Formations</h4>
+              <p>Informatique · Gestion · Réseaux · Langues</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-right rv">
+        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:72px;height:72px;margin:0 auto 20px;display:block;" aria-hidden="true">
+          <circle cx="50" cy="50" r="48" stroke="#00BCD4" stroke-width="3" fill="none"/>
+          <line x1="50" y1="4" x2="50" y2="14" stroke="#00BCD4" stroke-width="3.5" stroke-linecap="round"/>
+          <line x1="50" y1="86" x2="50" y2="96" stroke="#00BCD4" stroke-width="3.5" stroke-linecap="round"/>
+          <line x1="4" y1="50" x2="14" y2="50" stroke="#00BCD4" stroke-width="3.5" stroke-linecap="round"/>
+          <line x1="86" y1="50" x2="96" y2="50" stroke="#00BCD4" stroke-width="3.5" stroke-linecap="round"/>
+          <line x1="15" y1="15" x2="22" y2="22" stroke="#00BCD4" stroke-width="2.8" stroke-linecap="round" opacity=".5"/>
+          <line x1="85" y1="15" x2="78" y2="22" stroke="#00BCD4" stroke-width="2.8" stroke-linecap="round" opacity=".5"/>
+          <line x1="15" y1="85" x2="22" y2="78" stroke="#00BCD4" stroke-width="2.8" stroke-linecap="round" opacity=".5"/>
+          <line x1="85" y1="85" x2="78" y2="78" stroke="#00BCD4" stroke-width="2.8" stroke-linecap="round" opacity=".5"/>
+          <path d="M50 22C36 22 26 32 26 44C26 53 31 60 38 64L38 72L62 72L62 64C69 60 74 53 74 44C74 32 64 22 50 22Z" fill="#00BCD4"/>
+          <circle cx="50" cy="43" r="12" fill="#060E18"/>
+          <line x1="50" y1="43" x2="50" y2="35" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="50" y1="43" x2="58" y2="47" stroke="#444" stroke-width="2" stroke-linecap="round"/>
+          <rect x="40" y="72" width="20" height="4" rx="2" fill="#00BCD4"/>
+          <rect x="42" y="76" width="16" height="4" rx="2" fill="#00BCD4"/>
+          <rect x="44" y="80" width="12" height="4" rx="2" fill="#00BCD4"/>
+          <rect x="43" y="65" width="14" height="3" rx="1.5" fill="white"/>
+          <rect x="49" y="67" width="2" height="5" rx="1" fill="white"/>
+        </svg>
+        <h3>Prêt à commencer ?</h3>
+        <p>Contacte-nous pour connaître les prochaines sessions et réserver ta place. Formation accessible à tous.</p>
+        <a href="tel:+221771708181" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:8px;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11.7 19.79 19.79 0 01.1 3.1 2 2 0 012.11 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.09a16 16 0 006 6l.56-.56a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          Appeler · 77 170 81 81
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA FINAL ══ -->
+<div class="cta-sec">
+  <div class="wrap">
+    <div class="cta-banner">
+      <h2>Lance ta carrière avec <span class="gt">10HTECH</span></h2>
+      <p>En face arrêt BRT Hyacinthe Thiandoum · <strong class="cx">77 170 81 81</strong></p>
+      <div class="cta-btns">
+        <a href="tel:+221771708181" class="btn btn-primary" style="padding:15px 32px;font-size:1rem;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11.7 19.79 19.79 0 01.1 3.1 2 2 0 012.11 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.09a16 16 0 006 6l.56-.56a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          Nous appeler
+        </a>
+        <a href="#formations" class="btn btn-secondary" style="padding:15px 32px;font-size:1rem;">Voir les formations</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="#" class="nav-logo" style="display:inline-flex;">
+          <svg class="logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="50" cy="50" r="48" stroke="#00BCD4" stroke-width="3" fill="none"/>
+            <line x1="50" y1="4" x2="50" y2="14" stroke="#00BCD4" stroke-width="3.5" stroke-linecap="round"/>
+            <line x1="50" y1="86" x2="50" y2="96" stroke="#00BCD4" stroke-width="3.5" stroke-linecap="round"/>
+            <line x1="4" y1="50" x2="14" y2="50" stroke="#00BCD4" stroke-width="3.5" stroke-linecap="round"/>
+            <line x1="86" y1="50" x2="96" y2="50" stroke="#00BCD4" stroke-width="3.5" stroke-linecap="round"/>
+            <path d="M50 22C36 22 26 32 26 44C26 53 31 60 38 64L38 72L62 72L62 64C69 60 74 53 74 44C74 32 64 22 50 22Z" fill="#00BCD4"/>
+            <circle cx="50" cy="43" r="12" fill="#060E18"/>
+            <line x1="50" y1="43" x2="50" y2="35" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="50" y1="43" x2="58" y2="47" stroke="#444" stroke-width="2" stroke-linecap="round"/>
+            <rect x="40" y="72" width="20" height="4" rx="2" fill="#00BCD4"/>
+            <rect x="42" y="76" width="16" height="4" rx="2" fill="#00BCD4"/>
+            <rect x="44" y="80" width="12" height="4" rx="2" fill="#00BCD4"/>
+          </svg>
+          <span class="logo-name">10H<span>TECH</span></span>
+        </a>
+        <p>Centre de formations accélérées en informatique, numérique, gestion et communication. En face arrêt BRT Hyacinthe Thiandoum.</p>
+      </div>
+      <div class="foot-col">
+        <h5>Formations</h5>
+        <ul>
+          <li><a href="#formations">Informatique</a></li>
+          <li><a href="#formations">Infographie</a></li>
+          <li><a href="#formations">Développement web</a></li>
+          <li><a href="#formations">Marketing digital</a></li>
+          <li><a href="#formations">Audiovisuelles</a></li>
+          <li><a href="#formations">Secrétariat</a></li>
+          <li><a href="#formations">Comptabilité</a></li>
+          <li><a href="#formations">Anglais</a></li>
+          <li><a href="#formations">Réseaux &amp; Systèmes</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Centre</h5>
+        <ul>
+          <li><a href="#pourquoi">Notre méthode</a></li>
+          <li><a href="#etapes">S'inscrire</a></li>
+          <li><a href="#contact">Nous trouver</a></li>
+          <li><a href="tel:+221771708181">77 170 81 81</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <p>© 2024 10HTECH · Tous droits réservés</p>
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#00BCD4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:5px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        BRT Hyacinthe Thiandoum &nbsp;·&nbsp; <a href="tel:+221771708181">77 170 81 81</a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('in'), i * 100);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+  // Nav opacité
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    nav.style.background = window.scrollY > 50
+      ? 'rgba(6,14,24,.97)'
+      : 'rgba(6,14,24,.85)';
+  }, { passive: true });
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
+</script>
+</body>
+</html>

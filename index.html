@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>10HTECH – Centre de Formations Accélérées</title>
+  <title>10HTECH  Centre de Formations Accélérées</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
@@ -181,7 +181,7 @@
     .sec-hd p { color: var(--sub); font-size: 1rem; max-width: 520px; margin: 0 auto; }
     .sec-hd .tag { margin-bottom: 18px; }
 
-    .form-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .form-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px; }
     .fcard {
       background: var(--navy); border: 1px solid var(--border);
       border-radius: 22px; padding: 36px;
@@ -208,6 +208,21 @@
       font-size: .9rem; color: var(--text); line-height: 1.45;
     }
     .fcard ul li::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--cyan); flex-shrink: 0; margin-top: 7px; }
+    .fcard-footer {
+      margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+    }
+    .fcard-duree {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(0,188,212,.12); border: 1px solid rgba(0,188,212,.25);
+      border-radius: 999px; padding: 5px 14px;
+      font-family: 'Outfit', sans-serif; font-size: .82rem; font-weight: 800; color: var(--cyan);
+    }
+    .fcard-duree svg { width: 13px; height: 13px; }
+    .fcard-prix { text-align: right; }
+    .fcard-prix .inscrip { font-size: .7rem; color: var(--sub); display: block; margin-bottom: 2px; }
+    .fcard-prix strong { font-family: 'Outfit', sans-serif; font-size: .92rem; font-weight: 800; color: var(--text); }
+    .fcard-prix .mensual { font-size: .72rem; color: var(--sub); display: block; margin-top: 2px; }
 
     /* ══════════════════════════
        POURQUOI
@@ -423,7 +438,7 @@
       .hero-inner { grid-template-columns: 1fr; }
       .hero-right { display: none; }
       .hero-left h1 { font-size: clamp(2.2rem, 5vw, 3.2rem); }
-      .form-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
+      /* form-grid auto via minmax */
       .why-inner { grid-template-columns: 1fr; gap: 48px; }
       .why-right { grid-template-columns: repeat(3, 1fr); max-width: 100%; }
       .wcard-wide { grid-column: span 3; }
@@ -456,8 +471,7 @@
       .hero-chips { gap: 6px; }
       .chip { font-size: .72rem; padding: 5px 10px; }
 
-      /* Formations */
-      .form-grid { grid-template-columns: 1fr; gap: 16px; }
+      /* Formations — auto via minmax */
       .fcard { padding: 28px 22px; }
       .fcard-num { font-size: 2.8rem; }
 
@@ -615,13 +629,16 @@
       </div>
       <div class="hero-divider"></div>
       <div class="hero-chips" aria-label="Domaines proposés">
-        <span class="chip">Informatique</span>
+        <span class="chip">Infographie</span>
         <span class="chip">Développement Web</span>
         <span class="chip">Marketing Digital</span>
         <span class="chip">Comptabilité</span>
-        <span class="chip">Infographie</span>
+        <span class="chip">Audiovisuelles</span>
         <span class="chip">Anglais</span>
         <span class="chip">Réseaux</span>
+        <span class="chip">Secrétariat</span>
+        <span class="chip">Gestion de caisse</span>
+        <span class="chip">Bureautique</span>
       </div>
     </div>
 
@@ -724,54 +741,258 @@
 <section id="formations" class="formations" aria-labelledby="form-h2">
   <div class="wrap">
     <div class="sec-hd">
-      <div class="tag"><span class="dot"></span>Catalogue</div>
+      <div class="tag"><span class="dot"></span>Catalogue 2026</div>
       <h2 id="form-h2">Toutes nos <span class="gt">formations</span></h2>
-      <p>Trois grands domaines pour couvrir toutes tes ambitions professionnelles.</p>
+      <p>10 formations pratiques et certifiantes pour booster ta carrière professionnelle.</p>
     </div>
     <div class="form-grid">
 
       <article class="fcard rv">
         <div class="fcard-glow"></div>
         <span class="fcard-num">01</span>
-        <h3>Informatique / Numérique / Digital</h3>
-        <p class="fcard-sub">Compétences numériques · Créativité · Web</p>
+        <h3>Informatique Bureautique</h3>
+        <p class="fcard-sub">Windows · Word · Excel · PowerPoint · Internet</p>
         <div class="fcard-divider"></div>
         <ul>
-          <li>Informatique</li>
-          <li>Infographie</li>
-          <li>Audiovisuelles</li>
-          <li>Marketing digital</li>
-          <li>Développement web</li>
+          <li>Windows &amp; navigation</li>
+          <li>Word (traitement de texte)</li>
+          <li>Excel (tableur)</li>
+          <li>PowerPoint (présentations)</li>
+          <li>Internet &amp; outils numériques</li>
         </ul>
+        <div class="fcard-footer">
+          <span class="fcard-duree">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            4 Mois
+          </span>
+          <div class="fcard-prix">
+            <span class="inscrip">Inscription : 20 000 F</span>
+            <strong>15 000 F / mois</strong>
+          </div>
+        </div>
       </article>
 
       <article class="fcard rv">
         <div class="fcard-glow"></div>
         <span class="fcard-num">02</span>
-        <h3>Gestion / Comptabilité / Communication</h3>
-        <p class="fcard-sub">Bureau · Finance · Langues professionnelles</p>
+        <h3>Secrétariat &amp; Assistanat</h3>
+        <p class="fcard-sub">Bureautique · Gestion administrative</p>
         <div class="fcard-divider"></div>
         <ul>
-          <li>Secrétariat bureautique</li>
-          <li>Assistanat de direction</li>
-          <li>Gestion de caisse</li>
-          <li>Comptabilité</li>
-          <li>Cours d'anglais</li>
-          <li>Parlais Anglais</li>
+          <li>Dactylographie</li>
+          <li>Informatique bureautique</li>
+          <li>Gestion administrative</li>
+          <li>Techniques d'expression</li>
+          <li>Communication professionnelle</li>
         </ul>
+        <div class="fcard-footer">
+          <span class="fcard-duree">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            5 Mois
+          </span>
+          <div class="fcard-prix">
+            <span class="inscrip">Inscription : 25 000 F</span>
+            <strong>15 000 F / mois</strong>
+          </div>
+        </div>
       </article>
 
       <article class="fcard rv">
         <div class="fcard-glow"></div>
         <span class="fcard-num">03</span>
-        <h3>Domaines Informatique</h3>
-        <p class="fcard-sub">Systèmes · Réseaux · Développement avancé</p>
+        <h3>Comptabilité &amp; Finance</h3>
+        <p class="fcard-sub">Comptabilité · Excel · Sage · Fiscalité</p>
         <div class="fcard-divider"></div>
         <ul>
-          <li>Informatique bureautique et avancé</li>
-          <li>Administration réseaux et systèmes</li>
-          <li>Développement web et mobile</li>
+          <li>Initiation en informatique</li>
+          <li>Comptabilité générale</li>
+          <li>Excel de base et avancé</li>
+          <li>Sage Saari comptabilité</li>
+          <li>Finance et fiscalité</li>
         </ul>
+        <div class="fcard-footer">
+          <span class="fcard-duree">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            6 Mois
+          </span>
+          <div class="fcard-prix">
+            <span class="inscrip">Inscription : 30 000 F</span>
+            <strong>20 000 F / mois</strong>
+          </div>
+        </div>
+      </article>
+
+      <article class="fcard rv">
+        <div class="fcard-glow"></div>
+        <span class="fcard-num">04</span>
+        <h3>Infographie &amp; Multimédia</h3>
+        <p class="fcard-sub">Retouche · Graphisme · Webdesign · 3D</p>
+        <div class="fcard-divider"></div>
+        <ul>
+          <li>Retouche photo &amp; Graphisme</li>
+          <li>Communication visuelle</li>
+          <li>Mise en page &amp; Webdesign</li>
+          <li>Infographie 3D</li>
+          <li>Logiciels : Ps / Ai / Id / Pr</li>
+        </ul>
+        <div class="fcard-footer">
+          <span class="fcard-duree">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            5 Mois
+          </span>
+          <div class="fcard-prix">
+            <span class="inscrip">Inscription : 25 000 F</span>
+            <strong>15 000 F / mois</strong>
+          </div>
+        </div>
+      </article>
+
+      <article class="fcard rv">
+        <div class="fcard-glow"></div>
+        <span class="fcard-num">05</span>
+        <h3>Administration Réseaux &amp; Systèmes</h3>
+        <p class="fcard-sub">Câblage · Réseaux · Maintenance · SQL</p>
+        <div class="fcard-divider"></div>
+        <ul>
+          <li>Fondements &amp; câblage réseau</li>
+          <li>Interconnexion des réseaux</li>
+          <li>Maintenance informatique</li>
+          <li>Systèmes d'exploitation</li>
+          <li>Programmation SQL</li>
+        </ul>
+        <div class="fcard-footer">
+          <span class="fcard-duree">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            5 Mois
+          </span>
+          <div class="fcard-prix">
+            <span class="inscrip">Inscription : 30 000 F</span>
+            <strong>20 000 F / mois</strong>
+          </div>
+        </div>
+      </article>
+
+      <article class="fcard rv">
+        <div class="fcard-glow"></div>
+        <span class="fcard-num">06</span>
+        <h3>Développement Web &amp; Mobile</h3>
+        <p class="fcard-sub">HTML · CSS · JS · PHP · Laravel · Angular</p>
+        <div class="fcard-divider"></div>
+        <ul>
+          <li>Informatique de base</li>
+          <li>Programmation web (HTML/CSS/JS/PHP)</li>
+          <li>Base de données MySQL</li>
+          <li>Hébergement &amp; référencement</li>
+          <li>Laravel &amp; Angular</li>
+        </ul>
+        <div class="fcard-footer">
+          <span class="fcard-duree">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            6 Mois
+          </span>
+          <div class="fcard-prix">
+            <span class="inscrip">Inscription : 30 000 F</span>
+            <strong>20 000 F / mois</strong>
+          </div>
+        </div>
+      </article>
+
+      <article class="fcard rv">
+        <div class="fcard-glow"></div>
+        <span class="fcard-num">07</span>
+        <h3>Marketing Digital</h3>
+        <p class="fcard-sub">Community Mgmt · WordPress · SEO</p>
+        <div class="fcard-divider"></div>
+        <ul>
+          <li>Communication digitale</li>
+          <li>Community Management</li>
+          <li>Vente en ligne</li>
+          <li>Référencement (SEO)</li>
+          <li>Création site WordPress &amp; Graphisme</li>
+        </ul>
+        <div class="fcard-footer">
+          <span class="fcard-duree">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            4 Mois
+          </span>
+          <div class="fcard-prix">
+            <span class="inscrip">Inscription : 30 000 F</span>
+            <strong>20 000 F / mois</strong>
+          </div>
+        </div>
+      </article>
+
+      <article class="fcard rv">
+        <div class="fcard-glow"></div>
+        <span class="fcard-num">08</span>
+        <h3>Audiovisuelles</h3>
+        <p class="fcard-sub">Cinéma · Tournage · Montage · Photographie</p>
+        <div class="fcard-divider"></div>
+        <ul>
+          <li>Cinéma &amp; Cadrage</li>
+          <li>Tournage &amp; Photographie</li>
+          <li>Montage vidéo &amp; Graphisme</li>
+          <li>Logiciels : Pr / Ae / Ps / Ai</li>
+        </ul>
+        <div class="fcard-footer">
+          <span class="fcard-duree">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            5 Mois
+          </span>
+          <div class="fcard-prix">
+            <span class="inscrip">Inscription : 30 000 F</span>
+            <strong>20 000 F / mois</strong>
+          </div>
+        </div>
+      </article>
+
+      <article class="fcard rv">
+        <div class="fcard-glow"></div>
+        <span class="fcard-num">09</span>
+        <h3>Gestion de Caisse &amp; Stock</h3>
+        <p class="fcard-sub">Boutique · Pharmacie · Restaurant · Hôtel</p>
+        <div class="fcard-divider"></div>
+        <ul>
+          <li>Informatique de caisse</li>
+          <li>Comptabilité de base</li>
+          <li>Techniques de caisse</li>
+          <li>Logiciels de gestion</li>
+        </ul>
+        <div class="fcard-footer">
+          <span class="fcard-duree">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            5 Mois
+          </span>
+          <div class="fcard-prix">
+            <span class="inscrip">Inscription : 20 000 F</span>
+            <strong>15 000 F / mois</strong>
+          </div>
+        </div>
+      </article>
+
+      <article class="fcard rv">
+        <div class="fcard-glow"></div>
+        <span class="fcard-num">10</span>
+        <h3>Cours d'Anglais</h3>
+        <p class="fcard-sub">Conversation · Business · Examens</p>
+        <div class="fcard-divider"></div>
+        <ul>
+          <li>Parler anglais (conversation)</li>
+          <li>Business English</li>
+          <li>Préparation examens / tests</li>
+          <li>Règles générales de la langue</li>
+          <li>Niveaux avancés</li>
+        </ul>
+        <div class="fcard-footer">
+          <span class="fcard-duree">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            4 Mois
+          </span>
+          <div class="fcard-prix">
+            <span class="inscrip">Inscription : 25 000 F</span>
+            <strong>20 000 F / mois</strong>
+          </div>
+        </div>
       </article>
 
     </div>
@@ -827,12 +1048,12 @@
       </div>
       <div class="why-right">
         <div class="wcard rv">
-          <span class="wcard-num">15+</span>
-          <p>filières disponibles</p>
+          <span class="wcard-num">10</span>
+          <p>formations disponibles</p>
         </div>
         <div class="wcard rv">
-          <span class="wcard-num">3</span>
-          <p>grands domaines d'expertise</p>
+          <span class="wcard-num">6</span>
+          <p>mois max · formation certifiante</p>
         </div>
         <div class="wcard rv">
           <span class="wcard-num">100%</span>
@@ -1026,15 +1247,16 @@
       <div class="foot-col">
         <h5>Formations</h5>
         <ul>
-          <li><a href="#formations">Informatique</a></li>
-          <li><a href="#formations">Infographie</a></li>
-          <li><a href="#formations">Développement web</a></li>
-          <li><a href="#formations">Marketing digital</a></li>
-          <li><a href="#formations">Audiovisuelles</a></li>
-          <li><a href="#formations">Secrétariat</a></li>
-          <li><a href="#formations">Comptabilité</a></li>
-          <li><a href="#formations">Anglais</a></li>
+          <li><a href="#formations">Infographie &amp; Multimédia</a></li>
           <li><a href="#formations">Réseaux &amp; Systèmes</a></li>
+          <li><a href="#formations">Développement Web &amp; Mobile</a></li>
+          <li><a href="#formations">Marketing Digital</a></li>
+          <li><a href="#formations">Comptabilité &amp; Finance</a></li>
+          <li><a href="#formations">Audiovisuelles</a></li>
+          <li><a href="#formations">Secrétariat &amp; Assistanat</a></li>
+          <li><a href="#formations">Bureautique</a></li>
+          <li><a href="#formations">Gestion de Caisse</a></li>
+          <li><a href="#formations">Cours d'Anglais</a></li>
         </ul>
       </div>
       <div class="foot-col">

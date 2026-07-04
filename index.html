@@ -439,7 +439,7 @@
       .hero-inner { grid-template-columns: 1fr; }
       .hero-right { display: none; }
       .hero-left h1 { font-size: clamp(2.2rem, 5vw, 3.2rem); }
-      /* form-grid auto via minmax */
+      .form-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
       .why-inner { grid-template-columns: 1fr; gap: 48px; }
       .why-right { grid-template-columns: repeat(3, 1fr); max-width: 100%; }
       .wcard-wide { grid-column: span 3; }
@@ -472,9 +472,11 @@
       .hero-chips { gap: 6px; }
       .chip { font-size: .72rem; padding: 5px 10px; }
 
-      /* Formations — auto via minmax */
-      .fcard { padding: 28px 22px; }
+      /* Formations : 1 colonne sur mobile */
+      .form-grid { grid-template-columns: 1fr; gap: 16px; }
+      .fcard { padding: 24px 20px; }
       .fcard-num { font-size: 2.8rem; }
+      .fcard-footer { flex-direction: row; }
 
       /* Pourquoi */
       .why-right { grid-template-columns: 1fr 1fr; }
@@ -519,13 +521,17 @@
       .hero-btns { flex-direction: column; }
       .hero-btns .btn { width: 100%; padding: 13px 20px; }
 
+      /* Formations 480px */
+      .form-grid { grid-template-columns: 1fr; gap: 14px; }
+      .fcard { padding: 20px 16px; }
+      .fcard ul li { font-size: .85rem; }
+      .fcard-footer { flex-direction: column; gap: 10px; }
+      .fcard-prix { text-align: left; }
+
       .why-right { grid-template-columns: 1fr 1fr; }
       .wcard { padding: 18px 12px; }
       .wcard-num { font-size: 1.6rem; }
       .wcard p { font-size: .75rem; }
-
-      .fcard { padding: 22px 16px; }
-      .fcard ul li { font-size: .85rem; }
 
       .feat { gap: 14px; padding: 18px 0; }
       .feat-ico { width: 38px; height: 38px; border-radius: 10px; }

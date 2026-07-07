@@ -238,6 +238,25 @@
     .fcard-prix .mensual { font-size: .72rem; color: var(--sub); display: block; margin-top: 2px; }
 
     /* ══════════════════════════
+       GALERIE
+    ══════════════════════════ */
+    .galerie { background: var(--navy); }
+    .galerie-coming {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 16px; padding: 72px 40px; text-align: center;
+      border: 2px dashed rgba(0,188,212,.25); border-radius: 24px;
+      background: rgba(0,188,212,.03);
+    }
+    .galerie-ico {
+      width: 72px; height: 72px; border-radius: 20px;
+      background: rgba(0,188,212,.1); border: 1px solid rgba(0,188,212,.2);
+      display: grid; place-items: center;
+    }
+    .galerie-ico svg { width: 34px; height: 34px; color: var(--cyan); }
+    .galerie-coming h3 { font-size: 1.3rem; font-weight: 800; }
+    .galerie-coming p { color: var(--sub); font-size: .92rem; max-width: 400px; line-height: 1.7; }
+
+    /* ══════════════════════════
        POURQUOI
     ══════════════════════════ */
     .why { background: var(--navy); }
@@ -590,6 +609,7 @@
 
   <ul class="nav-links">
     <li><a href="#formations">Formations</a></li>
+    <li><a href="#galerie">Galerie</a></li>
     <li><a href="#pourquoi">Notre méthode</a></li>
     <li><a href="#etapes">S'inscrire</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -611,6 +631,7 @@
 <div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Menu navigation">
   <button class="mobile-close" id="menuClose" aria-label="Fermer le menu">✕</button>
   <a href="#formations" class="menu-link">Formations</a>
+  <a href="#galerie" class="menu-link">Galerie</a>
   <a href="#pourquoi" class="menu-link">Notre méthode</a>
   <a href="#etapes" class="menu-link">S'inscrire</a>
   <a href="#contact" class="menu-link">Contact</a>
@@ -1014,6 +1035,24 @@
         </div>
       </article>
 
+    </div>
+  </div>
+</section>
+
+<!-- ══ GALERIE ══ -->
+<section id="galerie" class="galerie" aria-labelledby="galerie-h2">
+  <div class="wrap">
+    <div class="sec-hd">
+      <div class="tag"><span class="dot"></span>Galerie</div>
+      <h2 id="galerie-h2">La vie à <span class="gt">10HTECH</span></h2>
+      <p>Photos de nos étudiants, cérémonies de remise des attestations et moments forts du centre.</p>
+    </div>
+    <div class="galerie-coming rv">
+      <div class="galerie-ico">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      </div>
+      <h3>Photos bientôt disponibles</h3>
+      <p>Nous préparons notre galerie. Revenez bientôt pour découvrir les moments forts de 10HTECH.</p>
     </div>
   </div>
 </section>

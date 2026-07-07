@@ -211,8 +211,20 @@
     .fcard ul li::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--cyan); flex-shrink: 0; margin-top: 7px; }
     .fcard-footer {
       margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border);
+      display: flex; flex-direction: column; gap: 14px;
+    }
+    .fcard-info {
       display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
     }
+    .btn-dl {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      width: 100%; padding: 11px 16px; border-radius: 10px;
+      background: rgba(0,188,212,.08); border: 1px solid rgba(0,188,212,.3);
+      color: var(--cyan); font-family: 'Outfit', sans-serif; font-weight: 700; font-size: .82rem;
+      text-decoration: none; transition: .2s; cursor: pointer;
+    }
+    .btn-dl:hover { background: rgba(0,188,212,.18); border-color: var(--cyan); transform: translateY(-1px); }
+    .btn-dl svg { width: 15px; height: 15px; flex-shrink: 0; }
     .fcard-duree {
       display: inline-flex; align-items: center; gap: 7px;
       background: rgba(0,188,212,.12); border: 1px solid rgba(0,188,212,.25);
@@ -1287,6 +1299,40 @@
 </footer>
 
 <script>
+  // ── Boutons téléchargement affiches
+  const affiches = {
+    '01': 'affiches/informatique.jpeg',
+    '02': 'affiches/secretariat.jpeg',
+    '03': 'affiches/comptabilite.jpeg',
+    '04': 'affiches/infographie.jpeg',
+    '05': 'affiches/reseaux.jpeg',
+    '06': 'affiches/developpement-web.jpeg',
+    '07': 'affiches/marketing.jpeg',
+    '08': 'affiches/audiovisuel.jpeg',
+    '09': 'affiches/gestion-caisse.jpeg',
+    '10': 'affiches/anglais.jpeg'
+  };
+  document.querySelectorAll('.fcard').forEach(card => {
+    const num = card.querySelector('.fcard-num')?.textContent.trim();
+    const file = affiches[num];
+    if (!file) return;
+    const footer = card.querySelector('.fcard-footer');
+    if (!footer) return;
+    // Wrap existing children in fcard-info
+    const info = document.createElement('div');
+    info.className = 'fcard-info';
+    while (footer.firstChild) info.appendChild(footer.firstChild);
+    footer.appendChild(info);
+    // Add download button
+    const dlIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>`;
+    const btn = document.createElement('a');
+    btn.className = 'btn-dl';
+    btn.href = file;
+    btn.download = '';
+    btn.innerHTML = dlIcon + ' Télécharger l\'affiche';
+    footer.appendChild(btn);
+  });
+
   // ── Scroll reveal
   const io = new IntersectionObserver((entries) => {
     entries.forEach((e, i) => {
